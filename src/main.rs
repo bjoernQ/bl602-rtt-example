@@ -2,19 +2,16 @@
 #![no_main]
 
 use bl602_hal as hal;
-use core::fmt::Write;
+use blash_target::{init_print, println};
 use hal::{
     clock::{Strict, SysclkFreq, UART_PLL_FREQ},
     pac,
     prelude::*,
 };
-use panic_halt as _;
-
-extern crate jlink_rtt;
 
 #[riscv_rt::entry]
 fn main() -> ! {
-    let mut output = jlink_rtt::Output::new();
+    init_print!();
 
     let dp = pac::Peripherals::take().unwrap();
     let mut parts = dp.GLB.split();
@@ -26,13 +23,21 @@ fn main() -> ! {
         .uart_clk(UART_PLL_FREQ.Hz())
         .freeze(&mut parts.clk_cfg);
 
-    writeln!(output, "Start").ok();
+    println!("Start");
+
+    // panic!("You should see a backtrace in blash in case of a panic!");
+
+    // uncomment code below to trigger a "Load address misaligned" error
+    // let _foo = unsafe {
+    //     let foo = 0x22010001 as *mut u32;
+    //     *foo as u32
+    // };
 
     let mut i = 0;
 
     loop {
-        writeln!(output, "Hello BL602!").ok();
-        writeln!(output, "Hello, world! Count is {}", i).ok();
+        println!("Hello BL602!");
+        println!("Hello, world! Count is {}", i);
         i += 1;
         for _ in 0..250000 {}
     }

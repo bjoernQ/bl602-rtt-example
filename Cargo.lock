@@ -41,7 +41,7 @@ checksum = "dcb6dd1c2376d2e096796e234a70e17e94cc2d5d54ff8ce42b28cef1d0d359a4"
 [[package]]
 name = "bl602-hal"
 version = "0.1.0"
-source = "git+https://github.com/sipeed/bl602-hal?branch=main#dfc9946e79ea4dac18be11efce11d0592a8517fb"
+source = "git+https://github.com/sipeed/bl602-hal?branch=main#b67370136d5bb14192caef1df9041f0601a4fbc6"
 dependencies = [
  "bl602-pac",
  "embedded-hal 0.2.6",
@@ -68,12 +68,21 @@ name = "bl602-rtt-test"
 version = "0.1.0"
 dependencies = [
  "bl602-hal",
+ "blash-target",
  "embedded-time",
- "jlink_rtt",
  "nb 1.0.0",
- "panic-halt",
  "riscv 0.7.0",
  "riscv-rt",
+]
+
+[[package]]
+name = "blash-target"
+version = "0.1.0"
+source = "git+https://github.com/bjoernQ/blash-target?branch=main#a43a25edd641c0fdd46d37625270503645f143a9"
+dependencies = [
+ "bl602-hal",
+ "jlink_rtt",
+ "riscv 0.7.0",
 ]
 
 [[package]]
@@ -97,9 +106,9 @@ dependencies = [
 
 [[package]]
 name = "embedded-time"
-version = "0.12.0"
+version = "0.12.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86fbafcea0dea120d8ed8af67ddbf82afc031f1d3b064920645db8d061781e2c"
+checksum = "d7a4b4d10ac48d08bfe3db7688c402baadb244721f30a77ce360bd24c3dffe58"
 dependencies = [
  "num",
 ]
@@ -199,12 +208,6 @@ checksum = "9a64b1ec5cda2586e284722486d802acf1f7dbdc623e2bfc57e65ca1cd099290"
 dependencies = [
  "autocfg",
 ]
-
-[[package]]
-name = "panic-halt"
-version = "0.2.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "de96540e0ebde571dc55c73d60ef407c653844e6f9a1e2fdbd40c07b9252d812"
 
 [[package]]
 name = "paste"
